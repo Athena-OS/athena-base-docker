@@ -63,9 +63,9 @@ $(OUTPUTDIR)/Dockerfile.base-devel: $(OUTPUTDIR)/base-devel.tar.zst
 
 .PHONY: docker-image-base
 image-base: $(OUTPUTDIR)/Dockerfile.base
-	${DOCKER} build -f $(OUTPUTDIR)/Dockerfile.base -t archlinux/archlinux:base $(OUTPUTDIR)
+	${DOCKER} build -f $(OUTPUTDIR)/Dockerfile.base -t athena/athena:base $(OUTPUTDIR)
 
 .PHONY: docker-image-base-devel
 image-base-devel: $(OUTPUTDIR)/Dockerfile.base-devel
-	${DOCKER} build -f $(OUTPUTDIR)/Dockerfile.base-devel -t archlinux/archlinux:base-devel $(OUTPUTDIR)
+	${DOCKER} build -f $(OUTPUTDIR)/Dockerfile.base-devel -t athena/athena:base-devel $(OUTPUTDIR)
   
