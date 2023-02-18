@@ -5,7 +5,7 @@ RUN pacman -Syyu
 ###                  BASIC PACKAGES                 ###
 #######################################################
 
-RUN pacman -S --noconfirm --needed accountsservice alsa-utils amd-ucode base base-devel btrfs-progs dhcpcd dialog dosfstools edk2-shell efibootmgr grub inetutils intel-ucode irqbalance linux-firmware linux-zen linux-zen-headers lvm2 man-db man-pages memtest86+ mesa mesa-utils mkinitcpio-archiso mkinitcpio-nfs-utils most mtools nano nbd net-tools netctl networkmanager nfs-utils nohang ntfs-3g ntfsprogs os-prober pavucontrol profile-sync-daemon pv rsync sof-firmware squashfs-tools sudo syslinux timelineproject-hg wireless_tools wpa_supplicant xdg-user-dirs
+RUN pacman -S --noconfirm --needed accountsservice alsa-utils btrfs-progs dhcpcd dialog inetutils man-db man-pages mesa mesa-utils most nano nbd net-tools netctl networkmanager nohang pavucontrol profile-sync-daemon pv rsync sof-firmware sudo timelineproject-hg wireless_tools wpa_supplicant xdg-user-dirs
 
 #######################################################
 ###                   DEPENDENCIES                  ###
@@ -35,7 +35,7 @@ RUN pacman -S --noconfirm --needed ananicy asciinema bashtop bat bc bless btrfs-
 ###                   CHAOTIC AUR                   ###
 #######################################################
 
-RUN pacman -S --noconfirm --needed chaotic-keyring chaotic-mirrorlist mkinitcpio-openswap powershell
+RUN pacman -S --noconfirm --needed chaotic-keyring chaotic-mirrorlist powershell
 
 #######################################################
 ###                    BLACKARCH                    ###
