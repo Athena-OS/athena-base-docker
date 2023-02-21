@@ -47,14 +47,48 @@ RUN pacman -S --noconfirm --needed blackarch-keyring blackarch-mirrorlist
 ###                ATHENA REPOSITORY                ###
 #######################################################
 
-RUN pacman -S --noconfirm --needed athena-application-config athena-blue-eyes-theme athena-calamares athena-calamares-config athena-firefox-config athena-keyring athena-nvchad athena-pentoxic-menu athena-pwnage-menu athena-system-installation athena-theme-tweak athena-vscode-themes athena-welcome figlet-fonts gnome-shell-extension-appindicator-git gnome-shell-extension-desktop-icons-ng gnome-shell-extension-fly-pie-git gnome-shell-extension-pop-shell-git gnome-shell-extension-ubuntu-dock-git htb-tools myman nist-feed superbfetch-git toilet-fonts
+RUN pacman -S --noconfirm --needed athena-application-config athena-blue-eyes-theme athena-calamares athena-calamares-config athena-firefox-config athena-keyring athena-nvchad athena-pentoxic-menu athena-pwnage-menu athena-theme-tweak athena-vscode-themes athena-welcome figlet-fonts gnome-shell-extension-appindicator-git gnome-shell-extension-desktop-icons-ng gnome-shell-extension-fly-pie-git gnome-shell-extension-pop-shell-git gnome-shell-extension-ubuntu-dock-git htb-tools myman nist-feed superbfetch-git toilet-fonts
+
 RUN pacman -S --noconfirm --needed --overwrite "/etc/pacman.d/gnupg/*" athena-system-config
+
+#######################################################
+###                    SERVICES                     ###
+#######################################################
+
+RUN pacman -S --noconfirm --needed openssh xorgxrdp xrdp
+RUN pacman -S --noconfirm --needed openssl shellinabox
+
+#######################################################
+###                     noVNC                       ###
+#######################################################
+
+RUN pacman -S --noconfirm --needed libvncserver supervisor x11vnc xorg-server-xvfb
+#RUN pacman -S --noconfirm --needed xfce4 xfce4-goodies xfce4-power-manager
+RUN reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+RUN pacman -S --noconfirm --needed novnc
+RUN echo "gnome-session --session=gnome" > ~/.xsession
+RUN cp -r /etc/skel/. /root/. && echo 'root:athena' | chpasswd && echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+
+# Expose needed ports
+EXPOSE 22/tcp
+EXPOSE 3389/tcp
+EXPOSE 8080/tcp
+
+# Set operable environment
+ENV DISPLAY=:0
+
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 RUN systemd-machine-id-setup
 RUN useradd -ms /bin/bash athena
 RUN usermod -aG wheel athena && echo "athena ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/athena
 RUN chmod 044 /etc/sudoers.d/athena
-RUN pacman -S --noconfirm --needed openssl shellinabox
-USER athena:athena
-WORKDIR /home/athena
-RUN xdg-user-dirs-update
-CMD ["/bin/bash"]
+##COPY docker-entrypoint.sh /
+#USER athena:athena
+#WORKDIR /home/athena
+#RUN xdg-user-dirs-update
+
+#ENTRYPOINT ["/docker-entrypoint.sh"]
+# Launch X11, x11vnc, gnome and noVNC from supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf", "--pidfile", "/run/supervisord.pid"]
+ENTRYPOINT []
