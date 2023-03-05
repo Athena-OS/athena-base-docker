@@ -14,7 +14,7 @@ define rootfs
 		--noconfirm --dbpath $(BUILDDIR)/var/lib/pacman \
 		--config $(BUILDDIR)/etc/pacman.conf \
 		--noscriptlet \
-		--hookdir $(BUILDDIR)/alpm-hooks/usr/share/libalpm/hooks/ $(2) $(3) $(4) $(5)
+		--hookdir $(BUILDDIR)/alpm-hooks/usr/share/libalpm/hooks/ $(2) $(3) $(4) $(5) $(6)
 
 	cp --recursive --preserve=timestamps --backup --suffix=.pacnew rootfs/* $(BUILDDIR)/
 
@@ -50,10 +50,10 @@ clean:
 	rm -rf $(BUILDDIR) $(OUTPUTDIR)
 
 $(OUTPUTDIR)/base.tar.zst:
-	$(call rootfs,base,base,athena-keyring,blackarch-keyring,chaotic-keyring)
+	$(call rootfs,base,base,zsh,athena-keyring,blackarch-keyring,chaotic-keyring)
 
 $(OUTPUTDIR)/base-devel.tar.zst:
-	$(call rootfs,base-devel,base base-devel,athena-keyring,blackarch-keyring,chaotic-keyring)
+	$(call rootfs,base-devel,base base-devel,zsh,athena-keyring,blackarch-keyring,chaotic-keyring)
 
 $(OUTPUTDIR)/Dockerfile.base: $(OUTPUTDIR)/base.tar.zst
 	$(call dockerfile,base)
