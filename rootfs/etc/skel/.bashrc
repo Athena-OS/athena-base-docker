@@ -193,7 +193,6 @@ ex ()
 export PROMPT_COMMAND='source ~/.bashrc'
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export SHELL=$(which bash)
 
 buffer_clean(){
 	free -h && sudo sh -c 'echo 1 >  /proc/sys/vm/drop_caches' && free -h
