@@ -50,10 +50,10 @@ clean:
 	rm -rf $(BUILDDIR) $(OUTPUTDIR)
 
 $(OUTPUTDIR)/base.tar.zst:
-	$(call rootfs,base,base,athena-keyring,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
+	$(call rootfs,base,base,athena-keyring,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist,bash,pacman)
 
 $(OUTPUTDIR)/base-devel.tar.zst:
-	$(call rootfs,base-devel,base base-devel,athena-keyring,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
+	$(call rootfs,base-devel,base base-devel,athena-keyring,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist,bash,pacman)
 
 $(OUTPUTDIR)/Dockerfile.base: $(OUTPUTDIR)/base.tar.zst
 	$(call dockerfile,base)
