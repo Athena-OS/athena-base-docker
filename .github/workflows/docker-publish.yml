@@ -25,12 +25,12 @@ jobs:
 
       - name: Build base
         run: |
-          make img-base
+          make image-base
           docker tag athenaos/base docker.io/athenaos/$BASE_IMG
 
       - name: Build base-devel
         run: |
-          make img-base-devel
+          make image-base-devel
           docker tag athenaos/base-devel docker.io/athenaos/$BASE_DEVEL_IMG
 
       - name: Log into registry
