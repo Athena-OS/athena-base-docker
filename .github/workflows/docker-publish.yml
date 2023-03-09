@@ -15,7 +15,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     container:
-      image: athenaos/base-devel
+      image: athenaos/base
 
     steps:
       - uses: actions/checkout@v3
