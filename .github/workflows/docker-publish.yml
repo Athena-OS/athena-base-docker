@@ -26,12 +26,12 @@ jobs:
       - name: Build base
         run: |
           make image-base
-          docker tag athenaos/base docker.io/athenaos/$BASE_IMG
+# docker tag athenaos/base docker.io/athenaos/$BASE_IMG
 
       - name: Build base-devel
         run: |
           make image-base-devel
-          docker tag athenaos/base-devel docker.io/athenaos/$BASE_DEVEL_IMG
+# docker tag athenaos/base-devel docker.io/athenaos/$BASE_DEVEL_IMG
 
       - name: Log into registry
         uses: docker/login-action@v2
@@ -41,5 +41,5 @@ jobs:
 
       - name: Push image
         run: |
-          docker push docker.io/athenaos/$BASE_IMG
-          docker push docker.io/athenaos/$BASE_DEVEL_IMG
+          docker push docker.io/athenaos/base
+          docker push docker.io/athenaos/base-devel
