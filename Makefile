@@ -10,13 +10,13 @@ define rootfs
 	install -Dm644 /usr/share/devtools/pacman-extra.conf $(BUILDDIR)/etc/pacman.conf
 	cat pacman-conf.d-noextract.conf >> $(BUILDDIR)/etc/pacman.conf
 
+	cp --recursive --preserve=timestamps --backup --suffix=.pacnew rootfs/* $(BUILDDIR)/
+
 	fakechroot -- fakeroot -- pacman -Sy -r $(BUILDDIR) \
 		--noconfirm --dbpath $(BUILDDIR)/var/lib/pacman \
 		--config $(BUILDDIR)/etc/pacman.conf \
 		--noscriptlet \
 		--hookdir $(BUILDDIR)/alpm-hooks/usr/share/libalpm/hooks/ $(2) $(3) $(4) $(5) $(6) $(7)
-
-	cp --recursive --preserve=timestamps --backup --suffix=.pacnew rootfs/* $(BUILDDIR)/
 
 	fakechroot -- fakeroot -- chroot $(BUILDDIR) update-ca-trust
 	fakechroot -- fakeroot -- chroot $(BUILDDIR) sh -c 'pacman-key --init && pacman-key --populate && bash -c "rm -rf etc/pacman.d/gnupg/{openpgp-revocs.d/,private-keys-v1.d/,pubring.gpg~,gnupg.S.}*"'
