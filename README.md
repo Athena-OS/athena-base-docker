@@ -36,6 +36,12 @@ Run `make image-base` to build the `base` image with the
 `base` meta package installed. You can also run `make image-base-devel` to
 build the image `base-devel` which additionally has the `base-devel` group installed.
 
+Then, push the image by:
+```
+docker push athenaos/base:latest
+docker push athenaos/base-devel:latest
+```
+
 <!-- ## Pipeline
 
 ### Daily builds
