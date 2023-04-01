@@ -32,15 +32,6 @@ if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
-
-if [ -d "$HOME/.bin" ] ;
-  then PATH="$HOME/.bin:$PATH"
-fi
-
-if [ -d "$HOME/.local/bin" ] ;
-  then PATH="$HOME/.local/bin:$PATH"
-fi
-
 # COLOURS! YAAAY!
 export TERM=xterm-256color
 
@@ -188,8 +179,6 @@ ex ()
 }
 
 export PROMPT_COMMAND='source ~/.bashrc'
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 buffer_clean(){
 	free -h && sudo sh -c 'echo 1 >  /proc/sys/vm/drop_caches' && free -h
