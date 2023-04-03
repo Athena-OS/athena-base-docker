@@ -29,6 +29,11 @@ define rootfs
 	# remove passwordless login for root (see CVE-2019-5021 for reference)
 	sed -i -e 's/^root::/root:!:/' "$(BUILDDIR)/etc/shadow"
 
+        # uncomment all mirrorlist servers
+        sed -i -e "s/#Server/Server/g" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
+        sed -i -e "s/#Server/Server/g" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
+
+
 	# fakeroot to map the gid/uid of the builder process to root
 	# fixes #22
 	fakeroot -- tar --numeric-owner --xattrs --acls --exclude-from=exclude -C $(BUILDDIR) -c . -f $(OUTPUTDIR)/$(1).tar
