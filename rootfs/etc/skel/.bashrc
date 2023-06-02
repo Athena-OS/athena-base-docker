@@ -72,7 +72,7 @@ export WEBPARAM="$SECLISTS/Discovery/Web-Content/burp-parameter-names.txt"
 [[ $- != *i* ]] && return
 
 # switch shell
-[[ $(ps --no-header --pid=$PPID --format=comm) != "${SHELL#/usr/bin/}" && -z ${BASH_EXECUTION_STRING} && ${SHELL} != "/usr/bin/bash" ]] && exec $SHELL
+#[[ $(ps --no-header --pid=$PPID --format=comm) != "${SHELL#/usr/bin/}" && -z ${BASH_EXECUTION_STRING} && ${SHELL} != "/usr/bin/bash" ]] && exec $SHELL
 
 #Configure zoxide for bash
 eval "$(zoxide init bash)"
@@ -84,8 +84,8 @@ elif [[ $(tty) == */dev/tty* ]]; then
 fi
 
 # Use bash-completion, if available
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-    . /usr/share/bash-completion/bash_completion
+#[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+#    . /usr/share/bash-completion/bash_completion
 
 # Bash aliases
 if [ -f ~/.bash_aliases ]; then
@@ -250,4 +250,4 @@ buffer_clean(){
 #cpufetch
 #colorscript random
 
-[[ $1 != without-blesh && -f /usr/share/blesh/ble.sh ]] && source /usr/share/blesh/ble.sh
+#[[ $1 != without-blesh && -f /usr/share/blesh/ble.sh ]] && source /usr/share/blesh/ble.sh
