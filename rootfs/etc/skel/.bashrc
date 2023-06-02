@@ -31,8 +31,6 @@ export PAGER='most'
 # COLOURS! YAAAY!
 export TERM=xterm-256color
 
-export SHELL=$(which bash)
-
 #export BFETCH_INFO="pfetch"
 #export BFETCH_ART="$HOME/.local/textart/fetch/unix.textart"
 #export PF_INFO="Unix Genius"
