@@ -22,12 +22,15 @@ While the images are regularly kept up to date it is strongly recommended runnin
 
 ### Dependencies
 Install the following packages:
-
 * make
 * devtools
 * docker
 * fakechroot
 * fakeroot
+
+```
+sudo pacman -S make devtools docker fakechroot fakeroot
+```
 
 Make sure your user can directly interact with Docker (i.e. `docker info` works).
 
