@@ -49,11 +49,10 @@ to build the image `base-devel` which additionally has the `base-devel` group in
 
 Then, push the image by:
 ```
-docker push athenaos/base:latest
-docker push athenaos/base-devel:latest
+sudo docker login
+sudo docker push athenaos/base:latest
+sudo docker push athenaos/base-devel:latest
 ```
-
-<!-- ## Pipeline
 
 ### Daily builds
 
