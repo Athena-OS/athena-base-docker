@@ -35,9 +35,17 @@ sudo pacman -S make devtools docker fakechroot fakeroot
 Make sure your user can directly interact with Docker (i.e. `docker info` works).
 
 ### Usage
-Run `make image-base` to build the `base` image with the
-`base` meta package installed. You can also run `make image-base-devel` to
-build the image `base-devel` which additionally has the `base-devel` group installed.
+Run
+```
+sudo make image-base
+```
+to build the `base` image with the `base` meta package installed.
+
+You can also run
+```
+sudo make image-base-devel
+```
+to build the image `base-devel` which additionally has the `base-devel` group installed.
 
 Then, push the image by:
 ```
