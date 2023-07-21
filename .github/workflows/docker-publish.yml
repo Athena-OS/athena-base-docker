@@ -23,7 +23,7 @@ jobs:
       
       - name: Set fastest mirrors
         run: |
-          pacman -Syyu reflector
+          pacman -Syyu --noconfirm reflector
           reflector --age 6 --connection-timeout 15 --download-timeout 15 --latest 21 --fastest 21 --threads 21 --sort rate --protocol https --save /etc/pacman.d/mirrorlist
 
       - name: Install dependencies
