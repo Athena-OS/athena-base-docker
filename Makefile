@@ -9,7 +9,7 @@ define rootfs
 	install -Dm644 /usr/share/devtools/pacman.conf.d/extra.conf $(BUILDDIR)/etc/pacman.conf
 	cat pacman-conf.d-noextract.conf >> $(BUILDDIR)/etc/pacman.conf
 
-	fakechroot -- fakeroot -- pacman -Sy -r $(BUILDDIR) \
+	fakechroot -- fakeroot -- pacman -Syyu -r $(BUILDDIR) \
 		--noconfirm --dbpath $(BUILDDIR)/var/lib/pacman \
 		--config $(BUILDDIR)/etc/pacman.conf \
 		--noscriptlet \
@@ -29,16 +29,16 @@ define rootfs
 	# remove passwordless login for root (see CVE-2019-5021 for reference)
 	sed -i -e 's/^root::/root:!:/' "$(BUILDDIR)/etc/shadow"
 
-        # uncomment all mirrorlist servers
-        fakechroot -- fakeroot -- chroot $(BUILDDIR) sed -i -e "s/#Server/Server/g" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
-        fakechroot -- fakeroot -- chroot $(BUILDDIR) sed -i -e "s/#Server/Server/g" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
+    # uncomment all mirrorlist servers
+    sed -i -e "s/#Server/Server/g" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
+    sed -i -e "s/#Server/Server/g" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
 
-        # remove problematic mirror servers
-        fakechroot -- fakeroot -- chroot $(BUILDDIR) sed -i -e "/geo.mirror.pkgbuild.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
-        fakechroot -- fakeroot -- chroot $(BUILDDIR) sed -i -e "/mirror.osbeck.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
-        fakechroot -- fakeroot -- chroot $(BUILDDIR) sed -i -e "/mirrors.fosshost.org/d" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
-        fakechroot -- fakeroot -- chroot $(BUILDDIR) sed -i -e "/mirrors.fossho.st/d" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
-        fakechroot -- fakeroot -- chroot $(BUILDDIR) sed -i -e "/cdn-mirror.chaotic.cx/d" "$(BUILDDIR)/etc/pacman.d/chaotic-mirrorlist"
+    # remove problematic mirror servers
+    sed -i -e "/geo.mirror.pkgbuild.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
+    sed -i -e "/mirror.osbeck.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
+    sed -i -e "/mirrors.fosshost.org/d" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
+    sed -i -e "/mirrors.fossho.st/d" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
+    sed -i -e "/cdn-mirror.chaotic.cx/d" "$(BUILDDIR)/etc/pacman.d/chaotic-mirrorlist"
 
 
 	# fakeroot to map the gid/uid of the builder process to root
