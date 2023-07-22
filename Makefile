@@ -13,7 +13,7 @@ define rootfs
 		--noconfirm --dbpath $(BUILDDIR)/var/lib/pacman \
 		--config $(BUILDDIR)/etc/pacman.conf \
 		--noscriptlet \
-		--hookdir $(BUILDDIR)/alpm-hooks/usr/share/libalpm/hooks/ $(2)
+		--hookdir $(BUILDDIR)/alpm-hooks/usr/share/libalpm/hooks/ $(2) $(3) $(4) $(5) $(6) $(7) $(8) $(9)
 
 	cp --recursive --preserve=timestamps --backup --suffix=.pacnew rootfs/* $(BUILDDIR)/
 
@@ -38,7 +38,7 @@ define rootfs
     sed -i -e "/mirror.osbeck.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
     sed -i -e "/mirrors.fosshost.org/d" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
     sed -i -e "/mirrors.fossho.st/d" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
-    #sed -i -e "/cdn-mirror.chaotic.cx/d" "$(BUILDDIR)/etc/pacman.d/chaotic-mirrorlist"
+    sed -i -e "/cdn-mirror.chaotic.cx/d" "$(BUILDDIR)/etc/pacman.d/chaotic-mirrorlist"
 
 
 	# fakeroot to map the gid/uid of the builder process to root
@@ -58,10 +58,10 @@ clean:
 	rm -rf $(BUILDDIR) $(OUTPUTDIR)
 
 $(OUTPUTDIR)/base.tar.xz:
-	$(call rootfs,base,base blackarch-keyring)
+	$(call rootfs,base,base,pacman-mirrorlist,archlinux-keyring,athena-keyring,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
 
 $(OUTPUTDIR)/base-devel.tar.xz:
-	$(call rootfs,base-devel,base base-devel blackarch-keyring)
+	$(call rootfs,base-devel,base base-devel,pacman-mirrorlist,archlinux-keyring,athena-keyring,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
 
 $(OUTPUTDIR)/Dockerfile.base: $(OUTPUTDIR)/base.tar.xz
 	$(call dockerfile,base)
