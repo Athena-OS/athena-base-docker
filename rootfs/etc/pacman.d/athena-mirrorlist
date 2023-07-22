@@ -1,5 +1,0 @@
-# Global
-Server = https://athena-os.github.io/$repo/$arch
-
-# South Korea
-Server = https://mirror.pardesicat.xyz/athena-repository/$repo/$arch

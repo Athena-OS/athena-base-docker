@@ -13,7 +13,7 @@ define rootfs
 		--noconfirm --dbpath $(BUILDDIR)/var/lib/pacman \
 		--config $(BUILDDIR)/etc/pacman.conf \
 		--noscriptlet \
-		--hookdir $(BUILDDIR)/alpm-hooks/usr/share/libalpm/hooks/ $(2) $(3) $(4) $(5) $(6) $(7) $(8) $(9)
+		--hookdir $(BUILDDIR)/alpm-hooks/usr/share/libalpm/hooks/ $(2) $(3) $(4) $(5) $(6) $(7) $(8) $(9) $(10)
 
 	cp --recursive --preserve=timestamps --backup --suffix=.pacnew rootfs/* $(BUILDDIR)/
 
@@ -58,10 +58,10 @@ clean:
 	rm -rf $(BUILDDIR) $(OUTPUTDIR)
 
 $(OUTPUTDIR)/base.tar.xz:
-	$(call rootfs,base,base,pacman-mirrorlist,archlinux-keyring,athena-keyring,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
+	$(call rootfs,base,base,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
 
 $(OUTPUTDIR)/base-devel.tar.xz:
-	$(call rootfs,base-devel,base base-devel,pacman-mirrorlist,archlinux-keyring,athena-keyring,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
+	$(call rootfs,base-devel,base base-devel,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
 
 $(OUTPUTDIR)/Dockerfile.base: $(OUTPUTDIR)/base.tar.xz
 	$(call dockerfile,base)
