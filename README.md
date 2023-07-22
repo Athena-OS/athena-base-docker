@@ -25,6 +25,7 @@ Install the following packages:
 * make
 * devtools
 * docker
+* docker-buildx
 * fakechroot
 * fakeroot
 
