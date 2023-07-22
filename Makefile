@@ -71,9 +71,8 @@ $(OUTPUTDIR)/Dockerfile.base-devel: $(OUTPUTDIR)/base-devel.tar.zst
 
 .PHONY: docker-image-base
 image-base: $(OUTPUTDIR)/Dockerfile.base
-	docker build -f $(OUTPUTDIR)/Dockerfile.base -t athenaos/base:latest $(OUTPUTDIR)
+	docker buildx build -f $(OUTPUTDIR)/Dockerfile.base -t athenaos/base:latest $(OUTPUTDIR)
 
 .PHONY: docker-image-base-devel
 image-base-devel: $(OUTPUTDIR)/Dockerfile.base-devel
-	docker build -f $(OUTPUTDIR)/Dockerfile.base-devel -t athenaos/base-devel:latest $(OUTPUTDIR)
-  
+	docker buildx build -f $(OUTPUTDIR)/Dockerfile.base-devel -t athenaos/base-devel:latest $(OUTPUTDIR)
