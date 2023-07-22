@@ -36,14 +36,12 @@ jobs:
 
       - name: Build base
         run: |
-          make
-          make image-base
+          make athena-base
           docker tag athenaos/base docker.io/athenaos/$BASE_IMG:$LATEST_IMG
 
       - name: Build base-devel
         run: |
-          make
-          make image-base-devel
+          make athena-base-devel
           docker tag athenaos/base-devel docker.io/athenaos/$BASE_DEVEL_IMG:$LATEST_IMG
 
       - name: Log into registry
