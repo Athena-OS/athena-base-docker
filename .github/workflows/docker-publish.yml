@@ -17,6 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: athenaos/base-devel:latest
+      options: --ipc=host --security-opt seccomp=unconfined
+      credentials:
+        username: ${{ secrets.DOCKER_HUB_USER }}
+        password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      env:
+        DOCKER_BUILDKIT: 1
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
 
     steps:
       - uses: actions/checkout@v3
