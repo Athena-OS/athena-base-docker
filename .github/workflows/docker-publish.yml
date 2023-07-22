@@ -14,37 +14,26 @@ jobs:
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   publish:
+
     runs-on: ubuntu-latest
     container:
-      image: athenaos/base-devel:latest
+      image: blackarchlinux/blackarch:base-devel
 
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Set fastest mirrors
-        run: |
-          pacman -Syyu --noconfirm reflector
-          reflector --age 6 --connection-timeout 15 --download-timeout 15 --latest 21 --fastest 21 --threads 21 --sort rate --protocol https --save /etc/pacman.d/mirrorlist
 
       - name: Install dependencies
-        run: pacman -Syyu --noconfirm --needed make docker docker-buildx devtools fakeroot fakechroot
-        
-      - name: Check Docker API version
-        run: |
-          docker version --format '{{.Server.APIVersion}}'
-          docker version --format '{{.Client.APIVersion}}'
+        run: sudo pacman -Sy --noconfirm --needed make docker devtools fakeroot fakechroot
 
       - name: Build base
         run: |
-          make
-          make image-base
-          docker tag athenaos/base docker.io/athenaos/$BASE_IMG:$LATEST_IMG
+          make blackarch-base
+          docker tag blackarchlinux/blackarch:base docker.io/athenaos/$BASE_IMG:$LATEST_IMG
 
       - name: Build base-devel
         run: |
-          make
-          make image-base-devel
-          docker tag athenaos/base-devel docker.io/athenaos/$BASE_DEVEL_IMG:$LATEST_IMG
+          make blackarch-base-devel
+          docker tag blackarchlinux/blackarch:base-devel docker.io/athenaos/$BASE_DEVEL_IMG:$LATEST_IMG
 
       - name: Log into registry
         uses: docker/login-action@v2
