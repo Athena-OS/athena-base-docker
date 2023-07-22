@@ -41,11 +41,13 @@ define rootfs
     sed -i -e "/cdn-mirror.chaotic.cx/d" "$(BUILDDIR)/etc/pacman.d/chaotic-mirrorlist"
 
 
-	# fakeroot to map the gid/uid of the builder process to root
+    # fakeroot to map the gid/uid of the builder process to root
 
-	fakeroot -- tar --numeric-owner --xattrs --acls --exclude-from=exclude -C $(BUILDDIR) -c . -f $(OUTPUTDIR)/$(1).tar
+    fakeroot -- tar --numeric-owner --xattrs --acls --exclude-from=exclude -C $(BUILDDIR) -c . -f $(OUTPUTDIR)/$(1).tar
+    
+	# keep XZ as extension. If you use ZST instead of XZ, GitHub Actions workflow is not able to build and push correctly the image
 
-	cd $(OUTPUTDIR); xz -9 -T0 -f $(1).tar; sha256sum $(1).tar.xz > $(1).tar.xz.SHA256
+    cd $(OUTPUTDIR); xz -9 -T0 -f $(1).tar; sha256sum $(1).tar.xz > $(1).tar.xz.SHA256
 endef
 
 define dockerfile
