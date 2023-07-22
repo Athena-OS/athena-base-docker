@@ -36,13 +36,15 @@ jobs:
 
       - name: Build base
         run: |
-          make blackarch-base
-          docker tag blackarchlinux/blackarch:base docker.io/athenaos/$BASE_IMG:$LATEST_IMG
+          make
+          make image-base
+          docker tag athenaos/base docker.io/athenaos/$BASE_IMG:$LATEST_IMG
 
       - name: Build base-devel
         run: |
-          make blackarch-base-devel
-          docker tag blackarchlinux/blackarch:base-devel docker.io/athenaos/$BASE_DEVEL_IMG:$LATEST_IMG
+          make
+          make image-base-devel
+          docker tag athenaos/base-devel docker.io/athenaos/$BASE_DEVEL_IMG:$LATEST_IMG
 
       - name: Log into registry
         uses: docker/login-action@v2
