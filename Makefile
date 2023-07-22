@@ -71,8 +71,8 @@ $(OUTPUTDIR)/Dockerfile.base-devel: $(OUTPUTDIR)/base-devel.tar.xz
 
 .PHONY: docker-base
 athena-base: $(OUTPUTDIR)/Dockerfile.base
-	docker build -f $(OUTPUTDIR)/Dockerfile.base -t athenaos/base:latest $(OUTPUTDIR)
+	docker buildx build -f $(OUTPUTDIR)/Dockerfile.base -t athenaos/base:latest $(OUTPUTDIR)
 
 .PHONY: docker-base-devel
 athena-base-devel: $(OUTPUTDIR)/Dockerfile.base-devel
-	docker build -f $(OUTPUTDIR)/Dockerfile.base-devel -t athenaos/base-devel:latest $(OUTPUTDIR)
+	docker buildx build -f $(OUTPUTDIR)/Dockerfile.base-devel -t athenaos/base-devel:latest $(OUTPUTDIR)
