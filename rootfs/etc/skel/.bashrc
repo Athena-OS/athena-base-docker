@@ -11,12 +11,6 @@ append_path () {
 }
 append_path "$HOME/bin"
 append_path "$HOME/.local/bin"
-append_path "${HOME}/bin"
-append_path "/sbin"
-append_path "/usr/bin"
-append_path "/usr/sbin"
-append_path "/usr/local/bin"
-append_path "/usr/local/sbin"
 
 ### EXPORT ### Should be before the change of the shell
 export EDITOR=/usr/bin/nvim
