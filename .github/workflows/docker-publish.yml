@@ -15,9 +15,7 @@ env:
 # It is the case where the original athenaos/base-devel image in Docker Hub is corrupted or has been pushed an image with no repositories reported above.
 # In this case, just push the Athena Base-devel image atleast one time to Docker by using your local Athena machine with Athena, BlackArch and Chaotic repositories enabled.
 
-jobs:          
-  # Push image to GitHub Packages.
-  # See also https://docs.docker.com/docker-hub/builds/
+jobs:
   publish:
     runs-on: ubuntu-latest
     container:

@@ -45,11 +45,11 @@ define rootfs
 
 	fakeroot -- tar --numeric-owner --xattrs --acls --exclude-from=exclude -C $(BUILDDIR) -c . -f $(OUTPUTDIR)/$(1).tar
 
-	cd $(OUTPUTDIR); xz -9 -T0 -f $(1).tar; sha256sum $(1).tar.xz > $(1).tar.xz.SHA256
+	cd $(OUTPUTDIR); zstd --long -T0 -8 $(1).tar; sha256sum $(1).tar.zst > $(1).tar.zst.SHA256
 endef
 
 define dockerfile
-	sed -e "s|TEMPLATE_ROOTFS_FILE|$(1).tar.xz|" \
+	sed -e "s|TEMPLATE_ROOTFS_FILE|$(1).tar.zst|" \
 	    Dockerfile.template > $(OUTPUTDIR)/Dockerfile.$(1)
 endef
 
@@ -57,16 +57,16 @@ endef
 clean:
 	rm -rf $(BUILDDIR) $(OUTPUTDIR)
 
-$(OUTPUTDIR)/base.tar.xz:
+$(OUTPUTDIR)/base.tar.zst:
 	$(call rootfs,base,base,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
 
-$(OUTPUTDIR)/base-devel.tar.xz:
+$(OUTPUTDIR)/base-devel.tar.zst:
 	$(call rootfs,base-devel,base base-devel,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
 
-$(OUTPUTDIR)/Dockerfile.base: $(OUTPUTDIR)/base.tar.xz
+$(OUTPUTDIR)/Dockerfile.base: $(OUTPUTDIR)/base.tar.zst
 	$(call dockerfile,base)
 
-$(OUTPUTDIR)/Dockerfile.base-devel: $(OUTPUTDIR)/base-devel.tar.xz
+$(OUTPUTDIR)/Dockerfile.base-devel: $(OUTPUTDIR)/base-devel.tar.zst
 	$(call dockerfile,base-devel)
 
 .PHONY: docker-base
