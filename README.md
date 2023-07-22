@@ -38,31 +38,30 @@ Make sure your user can directly interact with Docker (i.e. `docker info` works)
 ### Usage
 Run
 ```
-sudo make image-base
+sudo make athena-base
 ```
-to build the `base` image with the `base` meta package installed.
+to build the `base` image with the `base` meta package installed. Push the image to Docker Hub by:
+```
+sudo docker push athenaos/base:latest
+```
 
 You can also run
 ```
-sudo make image-base-devel
+sudo make athena-base-devel
 ```
-to build the image `base-devel` which additionally has the `base-devel` group installed.
-
-Then, push the image by:
+to build the image `base-devel` which additionally has the `base-devel` group installed. Push the image to Docker Hub by:
 ```
-sudo docker login
-sudo docker push athenaos/base:latest
 sudo docker push athenaos/base-devel:latest
 ```
+If requested, the login must be performed by:
+```
+sudo docker login
+```
 
-### Daily builds
+### Weekly builds
 
-Daily images are build with scheduled [GitLab CI](https://gitlab.archlinux.org/archlinux/archlinux-docker/-/blob/master/.gitlab-ci.yml) using our own runner infrastructure. Initially root filesystem archives are constructed and provided in our [package registry](https://gitlab.archlinux.org/archlinux/archlinux-docker/-/packages). The released multi-stage Dockerfile downloads those archives and verifies their integrity before unpacking it into a Docker image layer. Images are built using [kaniko](https://github.com/GoogleContainerTools/kaniko) to avoid using privileged Docker containers, which also publishes them to our DockerHub repository.
-
-### Weekly releases
-
-Weekly releases to the official DockerHub library use the same pipeline as daily builds. Updates are provided as automatic [pull requests](https://github.com/docker-library/official-images/pulls?q=is%3Apr+archlinux+is%3Aclosed+author%3Aarchlinux-github) to the [official-images library](https://github.com/docker-library/official-images/blob/master/library/archlinux), whose GitHub pipeline will build the images using our provided rootfs archives and Dockerfiles.
+Weekly images are build with scheduled [GitLab CI](https://github.com/Athena-OS/athena-base-docker/blob/main/.github/workflows/docker-publish.yml) using our own runner infrastructure. Initially root filesystem archives are constructed and provided in this repository. The released multi-stage Dockerfile downloads those archives and verifies their integrity before unpacking it into a Docker image layer. Images could be built using [kaniko](https://github.com/GoogleContainerTools/kaniko) to avoid using privileged Docker containers, which also publishes them to our Docker Hub repository.
 
 ### Development
 
-Changes in Git feature branches are built and tested using the pipeline as well. Development images are uploaded to our [GitLab Container Registry](https://gitlab.archlinux.org/archlinux/archlinux-docker/container_registry). -->
+Changes in Git feature branches are built and tested using the pipeline as well. Development images are uploaded to our [Docker Hub Registry](https://hub.docker.com/u/athenaos).
