@@ -61,10 +61,10 @@ clean:
 	rm -rf $(BUILDDIR) $(OUTPUTDIR)
 
 $(OUTPUTDIR)/base.tar.xz:
-	$(call rootfs,base,base)
+	$(call rootfs,base,base,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
 
 $(OUTPUTDIR)/base-devel.tar.xz:
-	$(call rootfs,base-devel,base base-devel)
+	$(call rootfs,base-devel,base base-devel,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
 
 $(OUTPUTDIR)/Dockerfile.base: $(OUTPUTDIR)/base.tar.xz
 	$(call dockerfile,base)
