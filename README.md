@@ -60,7 +60,7 @@ sudo docker login
 
 ### Weekly builds
 
-Weekly images are build with scheduled [GitLab CI](https://github.com/Athena-OS/athena-base-docker/blob/main/.github/workflows/docker-publish.yml) using our own runner infrastructure. Initially root filesystem archives are constructed and provided in this repository. The released multi-stage Dockerfile downloads those archives and verifies their integrity before unpacking it into a Docker image layer. Images could be built using [kaniko](https://github.com/GoogleContainerTools/kaniko) to avoid using privileged Docker containers, which also publishes them to our Docker Hub repository.
+Weekly images are build with scheduled [GitHub Actions](https://github.com/Athena-OS/athena-base-docker/blob/main/.github/workflows/docker-publish.yml) using our own runner infrastructure. Initially root filesystem archives are constructed and provided in this repository. The released multi-stage Dockerfile downloads those archives and verifies their integrity before unpacking it into a Docker image layer. Images could be built using [kaniko](https://github.com/GoogleContainerTools/kaniko) to avoid using privileged Docker containers, which also publishes them to our Docker Hub repository.
 
 ### Development
 
