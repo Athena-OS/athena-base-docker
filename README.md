@@ -59,7 +59,7 @@ sudo docker login
 ```
 To create and run a container from the created image:
 ```
-docker run --rm -it --entrypoint bash <image-name-or-id>
+sudo docker run --rm -it --entrypoint bash <image-name-or-id>
 ```
 
 ### Weekly builds
