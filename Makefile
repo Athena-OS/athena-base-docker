@@ -35,6 +35,7 @@ define rootfs
 
     # remove problematic mirror servers
     sed -i -e "/geo.mirror.pkgbuild.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
+    sed -i -e "/mirrors.eze.sysarmy.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
     sed -i -e "/mirror.osbeck.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
     sed -i -e "/mirror.theo546.fr/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
     sed -i -e "/mirrors.fosshost.org/d" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
