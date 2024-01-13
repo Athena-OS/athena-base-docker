@@ -10,10 +10,10 @@ env:
   LATEST_IMG: latest
   BASE_IMG: base
 
-# IMPORTANT NOTE: The first time this automation is run, the invoked container in "image" field must access to Athena, BlackArch and Chaotic repositories otherwise
+# IMPORTANT NOTE: The first time this automation is run, the invoked container in "image" field must access to Athena and Chaotic repositories otherwise
 # when the building image tries to install chaotic-mirrorlist, it cannot find the package because the invoked container is not linked to its repository.
 # It is the case where the original athenaos/base-devel image in Docker Hub is corrupted or has been pushed an image with no repositories reported above.
-# In this case, just push the Athena Base-devel image atleast one time to Docker by using your local Athena machine with Athena, BlackArch and Chaotic repositories enabled.
+# In this case, just push the Athena Base-devel image atleast one time to Docker by using your local Athena machine with Athena and Chaotic repositories enabled.
 
 jobs:
   publish:

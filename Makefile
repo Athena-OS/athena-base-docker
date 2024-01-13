@@ -31,15 +31,12 @@ define rootfs
 
     # uncomment all mirrorlist servers
     sed -i -e "s/#Server/Server/g" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
-    sed -i -e "s/#Server/Server/g" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
 
     # remove problematic mirror servers
     sed -i -e "/geo.mirror.pkgbuild.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
-    sed -i -e "/mirrors.eze.sysarmy.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
+	sed -i -e "/mirrors.eze.sysarmy.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
     sed -i -e "/mirror.osbeck.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
     sed -i -e "/mirror.theo546.fr/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
-    sed -i -e "/mirrors.fosshost.org/d" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
-    sed -i -e "/mirrors.fossho.st/d" "$(BUILDDIR)/etc/pacman.d/blackarch-mirrorlist"
     sed -i -e "/cdn-mirror.chaotic.cx/d" "$(BUILDDIR)/etc/pacman.d/chaotic-mirrorlist"
 
 
@@ -62,10 +59,10 @@ clean:
 	rm -rf $(BUILDDIR) $(OUTPUTDIR)
 
 $(OUTPUTDIR)/base.tar.xz:
-	$(call rootfs,base,base,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
+	$(call rootfs,base,base,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
 
 $(OUTPUTDIR)/base-devel.tar.xz:
-	$(call rootfs,base-devel,base base-devel,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
+	$(call rootfs,base-devel,base base-devel,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,chaotic-keyring,chaotic-mirrorlist)
 
 $(OUTPUTDIR)/Dockerfile.base: $(OUTPUTDIR)/base.tar.xz
 	$(call dockerfile,base)
