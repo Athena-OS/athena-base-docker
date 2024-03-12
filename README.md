@@ -38,6 +38,7 @@ Make sure your user can directly interact with Docker (i.e. `docker info` works)
 ### Usage
 Run
 ```
+sudo make clean
 sudo make athena-base
 ```
 to build the `base` image with the `base` meta package installed. Push the image to Docker Hub by:
@@ -47,6 +48,7 @@ sudo docker push athenaos/base:latest
 
 You can also run
 ```
+sudo make clean
 sudo make athena-base-devel
 ```
 to build the image `base-devel` which additionally has the `base-devel` group installed. Push the image to Docker Hub by:
