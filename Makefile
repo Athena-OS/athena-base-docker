@@ -6,7 +6,8 @@ define rootfs
 	find /usr/share/libalpm/hooks -exec ln -sf /dev/null $(BUILDDIR)/alpm-hooks{} \;
 
 	mkdir -vp $(BUILDDIR)/var/lib/pacman/ $(OUTPUTDIR)
-	install -Dm644 /usr/share/devtools/pacman.conf.d/extra.conf $(BUILDDIR)/etc/pacman.conf
+	install -Dm644 /usr/share/devtools/pacman.conf.d/multilib.conf $(BUILDDIR)/etc/pacman.conf
+	sed -i "s/NoProgressBar/#NoProgressBar/g" $(BUILDDIR)/etc/pacman.conf
 	cat pacman-conf.d-noextract.conf >> $(BUILDDIR)/etc/pacman.conf
 
 	fakechroot -- fakeroot -- pacman -Syyu -r $(BUILDDIR) \
