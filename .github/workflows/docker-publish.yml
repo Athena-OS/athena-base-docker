@@ -22,7 +22,7 @@ jobs:
       image: athenaos/base-devel:latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Set fastest mirrors
         run: |
@@ -43,7 +43,7 @@ jobs:
           docker tag athenaos/base-devel docker.io/athenaos/$BASE_DEVEL_IMG:$LATEST_IMG
 
       - name: Log into registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
