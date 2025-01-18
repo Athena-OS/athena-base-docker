@@ -36,6 +36,11 @@ sudo pacman -S make devtools docker docker-buildx fakechroot fakeroot
 Make sure your user can directly interact with Docker (i.e. `docker info` works).
 
 ### Usage
+Start Docker daemon:
+```
+sudo systemctl start docker
+```
+
 Run
 ```
 sudo make clean
