@@ -14,7 +14,7 @@ define rootfs
 		--noconfirm --dbpath $(BUILDDIR)/var/lib/pacman \
 		--config $(BUILDDIR)/etc/pacman.conf \
 		--noscriptlet \
-		--hookdir $(BUILDDIR)/alpm-hooks/usr/share/libalpm/hooks/ $(2) $(3) $(4) $(5) $(6) $(7) $(8) $(9) $(10) $(11)
+		--hookdir $(BUILDDIR)/alpm-hooks/usr/share/libalpm/hooks/ $(2) $(3) $(4) $(5) $(6) $(7) $(8) $(9) $(10) $(11) $(12) $(13)
 
 	cp --recursive --preserve=timestamps --backup --suffix=.pacnew rootfs/* $(BUILDDIR)/
 
@@ -34,11 +34,11 @@ define rootfs
     sed -i -e "s/#Server/Server/g" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
 
     # remove problematic mirror servers
-    sed -i -e "/geo.mirror.pkgbuild.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
-	sed -i -e "/mirrors.eze.sysarmy.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
-    sed -i -e "/mirror.osbeck.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
-    sed -i -e "/mirror.theo546.fr/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
-    sed -i -e "/cdn-mirror.chaotic.cx/d" "$(BUILDDIR)/etc/pacman.d/chaotic-mirrorlist"
+    #sed -i -e "/geo.mirror.pkgbuild.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
+	#sed -i -e "/mirrors.eze.sysarmy.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
+    #sed -i -e "/mirror.osbeck.com/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
+    #sed -i -e "/mirror.theo546.fr/d" "$(BUILDDIR)/etc/pacman.d/mirrorlist"
+    #sed -i -e "/cdn-mirror.chaotic.cx/d" "$(BUILDDIR)/etc/pacman.d/chaotic-mirrorlist"
 
 
     # fakeroot to map the gid/uid of the builder process to root
@@ -60,10 +60,10 @@ clean:
 	rm -rf $(BUILDDIR) $(OUTPUTDIR)
 
 $(OUTPUTDIR)/base.tar.xz:
-	$(call rootfs,base,base,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,chaotic-keyring,chaotic-mirrorlist,rate-mirrors)
+	$(call rootfs,base,base,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist,rate-mirrors)
 
 $(OUTPUTDIR)/base-devel.tar.xz:
-	$(call rootfs,base-devel,base base-devel,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,chaotic-keyring,chaotic-mirrorlist,rate-mirrors)
+	$(call rootfs,base-devel,base base-devel,archlinux-keyring,pacman-mirrorlist,athena-keyring,athena-mirrorlist,blackarch-keyring,blackarch-mirrorlist,chaotic-keyring,chaotic-mirrorlist,rate-mirrors)
 
 $(OUTPUTDIR)/Dockerfile.base: $(OUTPUTDIR)/base.tar.xz
 	$(call dockerfile,base)
