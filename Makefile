@@ -7,7 +7,7 @@ define rootfs
 
 	mkdir -vp $(BUILDDIR)/var/lib/pacman/ $(OUTPUTDIR)
 	install -Dm644 /usr/share/devtools/pacman.conf.d/multilib.conf $(BUILDDIR)/etc/pacman.conf
-    printf "\nDisableSandbox\n" >> $(BUILDDIR)/etc/pacman.conf
+    sed -i "s/#DisableSandbox/DisableSandbox/g" $(BUILDDIR)/etc/pacman.conf
 	sed -i "s/NoProgressBar/#NoProgressBar/g" $(BUILDDIR)/etc/pacman.conf
 	cat pacman-conf.d-noextract.conf >> $(BUILDDIR)/etc/pacman.conf
 
